@@ -1,0 +1,1 @@
+python test.py -opt=options/test/ir-sde.yml

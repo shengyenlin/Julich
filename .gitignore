@@ -1,0 +1,14 @@
+*.pth
+*.ckpt
+*.png
+*.jpg
+*.tif
+*.pt
+
+ADL/adl_env
+ADL/PyTorch_lightening_refactor
+
+image-restoration-sde/irsde_env
+image-restoration-sde/experiments
+
+Restormer/restormer_env

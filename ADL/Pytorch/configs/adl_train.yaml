@@ -1,0 +1,71 @@
+# General
+model: ADL
+experiment_name: adl_with_restormer_dataset
+distributed: True
+
+data:
+  H: 512
+  W: 512
+  C: 1 # gray->1, color->3
+  batch_size: 4 
+  task_mode: DEN
+  train_std_interval:
+    - 0.0
+    - 50.0
+  test_stdVec:
+    - 50.0
+  shuffle: 1024
+  random_seed: 0
+  pin_memory: true
+  drop_last: true
+  img_types:
+    - png
+    - jpg
+    - jpeg
+    - bmp
+  train_valid_ratio: 1
+  num_valid_max: 256
+  localhost: null
+
+path:
+  train_dirs:
+    - '/mnt/big_disk/s.lin/restormer_dataset/train/DFWB'
+  val_dirs: 
+    - '/p/scratch/delia-mp/lin4/restormer_dataset/test/BSD68/'
+  test_dirs:
+    - '/p/scratch/delia-mp/lin4/restormer_dataset/test/Set12'
+    - '/p/scratch/delia-mp/lin4/restormer_dataset/test/BSD68'
+    - '/p/scratch/delia-mp/lin4/restormer_dataset/test/Urban100'
+
+ADL:
+  epochs: 50
+  print_model: true
+  lr: 5e-5
+  optimizer: Adam
+  lr_scheduler:
+    type: MultiStepLR
+    kwargs:
+      gamma: 0.8
+
+denoiser:
+  model: Efficient_Unet
+  epochs: 50
+  print_model: true
+  lr: 1e-4
+  optimizer: Adam
+  lr_scheduler:
+    type: MultiStepLR
+    kwargs:
+      gamma: 0.8
+
+discriminator:
+  model: Efficient_Unet_disc
+  epochs: 50
+  print_model: true
+  lr: 1e-4
+  optimizer: Adam
+  negative_slope: 0.1
+  lr_scheduler:
+    type: MultiStepLR
+    kwargs:
+      gamma: 0.8

@@ -1,0 +1,63 @@
+{
+    "model": "ADL",
+    "data":{
+        "H": 128,
+        "W": 128,
+        "task_mode": "DEN",
+        "shuffle": false,
+        "random_seed": 0,
+        "pin_memory": true,
+        "drop_last": true,
+        "num_valid_max": 256,
+        "localhost":null,
+        "img_types": ["png", "jpg", "jpeg", "bmp"],
+        "train_valid_ratio": 1, 
+
+        "use_customized_val_set": true,
+        "customized_val_set_len": 68
+    },
+
+
+    "ADL": {
+        "epochs": 50, 
+        "print_model": true,
+        "lr": 5e-5,
+        "optimizer":"Adam",
+        "lr_scheduler": {
+            "type": "MultiStepLR",
+            "kwargs": {
+                "gamma": 0.8
+            }
+        }
+    },
+
+    "denoiser": {
+        "model": "Efficient_Unet",
+        "epochs": 0,
+        "print_model": true,
+        "lr": 1e-4,
+        "optimizer":"Adam",
+        "lr_scheduler": {
+            "type": "MultiStepLR",
+            "kwargs": {
+                "gamma": 0.8
+            }
+        }
+    },
+
+
+    "discriminator": {
+        "model": "Efficient_Unet_disc",
+        "epochs": 0,
+        "print_model": true,
+        "lr": 1e-4,
+        "optimizer":"Adam",
+        "negative_slope":0.1,
+        "lr_scheduler": {
+            "type": "MultiStepLR",
+            "kwargs": {
+                "gamma": 0.8
+            }
+        }
+    }
+}
